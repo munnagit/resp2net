@@ -10,14 +10,33 @@
 	<title>Basic Form</title>
 
 	<link rel="stylesheet" href="assets/demo.css">
-	<link rel="stylesheet" href="assets/form-basic.css">
+    <link rel="stylesheet" href="assets/form-basic.css">
+       
+    <!-- Below two scripts are for enabling jquery based date picker to support firefox -->
+    <script type="text/javascript">
+        var datefield = document.createElement("input")
+        datefield.setAttribute("type", "date")
+        if (datefield.type != "date") { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+            document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+            document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+            document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n')
+        }
+    </script>
+    
+    <script>
+        if (datefield.type != "date") { //if browser doesn't support input type="date", initialize date picker widget:
+            jQuery(function ($) { //on document.ready
+                $('#birthday').datepicker();
+            })
+        }
+    </script>
 
 </head>
 
 
 	<header>
-		<h1>Freebie: 7 Clean and Responsive Forms</h1>
-        <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a>
+		<center><h1>NetTech New Customer</h1></center>
+        <!-- <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a> -->
     </header>
 
     <ul>
@@ -38,14 +57,42 @@
         <form class="form-basic" method="post" action="#">
 
             <div class="form-title-row">
-                <h1>Form Example</h1>
+                <h1>Client Bio Enrollment</h1>
             </div>
 
             <div class="form-row">
                 <label>
-                    <span>Full name</span>
+                    <span>Name</span>
                     <input type="text" name="name">
                 </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Mobile</span>
+                    <input type="text" name="mob">
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Aadhar</span>
+                    <input type="text" name="uid">
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Address</span>
+                    <textarea name="adrs"></textarea>
+                </label>
+            </div>
+
+            <div class="form-row">
+                    <label>
+                        <span>City</span>
+                        <input type="text" name="cty">
+                    </label>
             </div>
 
             <div class="form-row">
@@ -57,57 +104,21 @@
 
             <div class="form-row">
                 <label>
-                    <span>Dropdown</span>
-                    <select name="dropdown">
-                        <option>Option One</option>
-                        <option>Option Two</option>
-                        <option>Option Three</option>
-                        <option>Option Four</option>
+                    <span>Gender</span>
+                    <select name="dropdown" style="padding-right: 163px;">
+                        <option>Male</option>
+                        <option>Female</option>
                     </select>
                 </label>
             </div>
 
             <div class="form-row">
                 <label>
-                    <span>Textarea</span>
-                    <textarea name="textarea"></textarea>
+                    <span>Date Of Birth</span>
+                    <input type="date" id="birthday" name="birthday" size="20" />  
                 </label>
             </div>
 
-            <div class="form-row">
-                <label>
-                    <span>Checkbox</span>
-                    <input type="checkbox" name="checkbox" checked>
-                </label>
-            </div>
-
-            <div class="form-row">
-                <label><span>Radio</span></label>
-                <div class="form-radio-buttons">
-
-                    <div>
-                        <label>
-                            <input type="radio" name="radio">
-                            <span>Radio option 1</span>
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <input type="radio" name="radio">
-                            <span>Radio option 2</span>
-                        </label>
-                    </div>
-
-                    <div>
-                        <label>
-                            <input type="radio" name="radio">
-                            <span>Radio option 3</span>
-                        </label>
-                    </div>
-
-                </div>
-            </div>
 
             <div class="form-row">
                 <button type="submit">Submit Form</button>

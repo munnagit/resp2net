@@ -27,7 +27,7 @@ header{
 
 
 header h1{
-    float: left;
+    float: center;
 	font: normal 24px/1.5 'Open Sans', sans-serif;
 	color: #fff;
 }
