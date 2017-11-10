@@ -33,9 +33,39 @@
 
 </head>
 
-
-	<header>
-		<center><h1>NetTech New Customer</h1></center>
+<body>
+<?php
+if (isset($_POST["name"])) {
+    $name = $_POST['name'];
+    $mob= $_POST['mob'];
+    $uid= $_POST['uid'];
+    $adrs= $_POST['adrs'];
+    $cty= $_POST['cty'];
+    $email= $_POST['email'];
+    $gndr= $_POST['gndr'];
+    $birthday= $_POST['birthday'];
+    $dor= date('Y-m-d');
+    echo "Order: ". $_POST['birthday']. "<br />"; //Result Check
+  
+    //DB Connectivity & Insert Query
+    include("connection.php");
+    
+    $sql = "INSERT INTO tbl_clients ". "(cname, mno, uid, address, city, email, gender, dob, dor)". "VALUES('$name','$mob','$uid','$adrs','$cty','$email','$gndr','$birthday','$dor')";
+         
+    if ($con->query($sql) === true) {
+        //echo "New record created successfully"; echo "<br />";
+        echo "<div class='alert success'>
+        <span class='closebtn'>&times;</span>
+        <strong>Success!</strong> Client Created Successfully !!!
+        </div>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $con->error;
+    }    
+    $con->close();
+} 
+?> 
+    <header>
+        <center><h1>NetTech New Customer</h1></center>
         <!-- <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a> -->
     </header>
 
@@ -46,7 +76,7 @@
         <li><a href="form-mini.html">Mini</a></li>
         <li><a href="form-labels-on-top.html">Labels on Top</a></li>
         <li><a href="form-validation.html">Validation</a></li>
-        <li><a href="form-search.html">Search</a></li>
+        <li><a href="form-search.php">Search</a></li>
     </ul>
 
 
@@ -54,7 +84,7 @@
 
         <!-- You only need this form and the form-basic.css -->
 
-        <form class="form-basic" method="post" action="#">
+        <form action = "<?php $_PHP_SELF ?>" method = "POST" class="form-basic" method="post" action="#">
 
             <div class="form-title-row">
                 <h1>Client Bio Enrollment</h1>
@@ -105,9 +135,9 @@
             <div class="form-row">
                 <label>
                     <span>Gender</span>
-                    <select name="dropdown" style="padding-right: 163px;">
-                        <option>Male</option>
-                        <option>Female</option>
+                    <select name="gndr" style="padding-right: 163px;">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
                     </select>
                 </label>
             </div>
@@ -121,7 +151,7 @@
 
 
             <div class="form-row">
-                <button type="submit">Submit Form</button>
+                <button type="submit">Create</button>
             </div>
 
         </form>
