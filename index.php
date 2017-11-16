@@ -60,9 +60,9 @@ if (isset($_POST["name"])) {
         </div>";
     } else {
         echo "Error: " . $sql . "<br>" . $con->error;
-    }    
+    }
     $con->close();
-} 
+}
 ?> 
     <header>
         <center><h1>NetTech New Customer</h1></center>

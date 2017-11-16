@@ -10,6 +10,19 @@ html{
 	background-color: #efefef;
 }
 
+button{
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+    background-color:  #673ab7;
+    box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, 0.08);
+    color: #ffffff;
+    padding: 15px 22px;
+    margin-left: -4px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
 body{
 	font:14px/1.5 Arial, Helvetica, sans-serif;
 	margin:0;
@@ -85,6 +98,8 @@ ul li a:hover {
 ul li{
     display: inline-block;
 }
+
+
 
 
 @media (max-width: 1000px) {

@@ -1,50 +1,92 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+ <head>
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Search Form</title>
+	<title>Client Search</title>
 
 	<link rel="stylesheet" href="assets/demo.css">
 	<link rel="stylesheet" href="assets/form-search.css">
+    <link rel="stylesheet" href="assets/form-basic.css">
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    
+    <!-- Required CSS for table -->
+    <!--<link rel="stylesheet" href="assets/normalize.css"> -->
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js'></script>
+ </head>
 
-</head>
-
-
-	<header>
-		<h1>Freebie: 7 Clean and Responsive Forms</h1>
-        <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a>
+ <body>
+    <header>
+		<h1>NetTech Automation</h1>
     </header>
 
     <ul>
-        <li><a href="index.html">Basic</a></li>
-        <li><a href="form-register.html">Register</a></li>
-        <li><a href="form-login.html">Login</a></li>
-        <li><a href="form-mini.html">Mini</a></li>
-        <li><a href="form-labels-on-top.html">Labels on Top</a></li>
-        <li><a href="form-validation.html">Validation</a></li>
+        <li><a href="index.php">Basic</a></li>
         <li><a href="form-search.html" class="active">Search</a></li>
     </ul>
 
 
     <div class="main-content">
-
         <!-- You only need this form and the form-search.css -->
 
-        <form class="form-search" method="get" action="#">
-            <input type="search" name="search" placeholder="I am looking for..">
+        <form action = "<?php $_PHP_SELF ?>" method = "POST" class="form-search" method="post" action="#">
+            <input type="search" name="search" placeholder="Mobile No...">
             <button type="submit">Search</button>
             <i class="fa fa-search"></i>
-        </form>
+</form>
+     
+        
+        
+        <?php
+        if (isset($_POST["search"])) {
+            $mno = $_POST['search'];
+            //echo "Mno: ". $_POST['search']. "<br />"; //Result Check
+            include("connection.php");
+            $sql="SELECT * FROM tbl_clients WHERE mno = '".$mno."'";
+            $res=$con->query($sql);
+            $nrows=$res->num_rows;
+            echo "<br><br><br>";
+            echo "<form action = 'banking/index.php' method = 'POST' class='form-horizontal'>";
+            print "<table class=\"responstable\">\n";
+            print "         <tr>\n";
+            print "            <th><span>Select</span></th>\n";
+            print "            <th data-th=\"Order Details\"><span>Client ID</span></th>\n";
+            print "            <th>Name</th>\n";
+            print "            <th>Mobile Number</th>\n";
+            print "            <th>Aadhar</th>\n";
+            print "            <th>Date Of Birth</th>\n";
+            print "         </tr>";            
+            if ($nrows > 0) {
+                while ($get_column=$res->fetch_assoc()) {
+                    echo"<tr>
+                    <td><input type='radio' name='mno' value=" . $get_column['mno']. " />";
+                    echo "<td>". $get_column['cid']."</td>";
+                    echo "<td>". $get_column['cname']."</td>";
+                    echo "<td>". $get_column['mno']."</td>";
+                    echo "<td>". $get_column['uid']."</td>";
+                    echo "<td>". date('d-m-Y', strtotime($get_column['dob'])). "</td>";
+                    echo "</tr>";
+                }
+            }
+            echo "</table>
+            <br><br><br><br><br>
+            <div>
+            <center><button type='submit' >Banking</button></center>
+            </div>
+          </form>";
+         mysqli_close($con);
+        }
+        ?> 
 
-    </div>
+  </div>
 
-</body>
+ </body>
 
 </html>
