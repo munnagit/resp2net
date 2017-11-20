@@ -18,8 +18,25 @@
     <!-- Required CSS for table -->
     <!--<link rel="stylesheet" href="assets/normalize.css"> -->
     <link rel="stylesheet" href="assets/style.css">
-    
     <script src='http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+     <!-- Below script required for selecting radion button when click on row -->
+    <script>
+       $(function() { // <== Doc ready
+        
+            $('tr').click(function(event) {  
+        
+                if(event.target.type != "radio") {
+        
+                    var that = $(this).find('input:radio');
+                    that.attr('checked', !that.is(':checked'));
+        
+                }
+            });
+        });
+    </script>
+
  </head>
 
  <body>
@@ -28,7 +45,7 @@
     </header>
 
     <ul>
-        <li><a href="index.php">Basic</a></li>
+        <li><a href="index.php">New Client</a></li>
         <li><a href="form-search.html" class="active">Search</a></li>
     </ul>
 
@@ -40,7 +57,7 @@
             <input type="search" name="search" placeholder="Mobile No...">
             <button type="submit">Search</button>
             <i class="fa fa-search"></i>
-</form>
+        </form>
      
         
         
@@ -61,16 +78,20 @@
             print "            <th>Name</th>\n";
             print "            <th>Mobile Number</th>\n";
             print "            <th>Aadhar</th>\n";
+            print "            <th>SBI ACCNO</th>\n";
+            print "            <th>CIF NO</th>\n";
             print "            <th>Date Of Birth</th>\n";
-            print "         </tr>";            
+            print "         </tr>";
             if ($nrows > 0) {
                 while ($get_column=$res->fetch_assoc()) {
                     echo"<tr>
-                    <td><input type='radio' name='mno' value=" . $get_column['mno']. " />";
+                    <td><input type='radio' name='cid' value=" . $get_column['cid']. " />";
                     echo "<td>". $get_column['cid']."</td>";
                     echo "<td>". $get_column['cname']."</td>";
                     echo "<td>". $get_column['mno']."</td>";
                     echo "<td>". $get_column['uid']."</td>";
+                    echo "<td>". $get_column['sbiaccno']."</td>";
+                    echo "<td>". $get_column['cif']."</td>";
                     echo "<td>". date('d-m-Y', strtotime($get_column['dob'])). "</td>";
                     echo "</tr>";
                 }
@@ -81,7 +102,7 @@
             <center><button type='submit' >Banking</button></center>
             </div>
           </form>";
-         mysqli_close($con);
+            mysqli_close($con);
         }
         ?> 
 

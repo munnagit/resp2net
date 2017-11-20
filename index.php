@@ -40,6 +40,8 @@ if (isset($_POST["name"])) {
     $mob= $_POST['mob'];
     $uid= $_POST['uid'];
     $adrs= $_POST['adrs'];
+    $sbiaccno= $_POST['sbiaccno'];
+    $cif= $_POST['cif'];
     $cty= $_POST['cty'];
     $email= $_POST['email'];
     $gndr= $_POST['gndr'];
@@ -50,7 +52,7 @@ if (isset($_POST["name"])) {
     //DB Connectivity & Insert Query
     include("connection.php");
     
-    $sql = "INSERT INTO tbl_clients ". "(cname, mno, uid, address, city, email, gender, dob, dor)". "VALUES('$name','$mob','$uid','$adrs','$cty','$email','$gndr','$birthday','$dor')";
+    $sql = "INSERT INTO tbl_clients ". "(cname, mno, uid, address,sbiaccno, cif, city, email, gender, dob, dor)". "VALUES('$name','$mob','$uid','$adrs','$sbiaccno','$cif','$cty','$email','$gndr','$birthday','$dor')";
          
     if ($con->query($sql) === true) {
         //echo "New record created successfully"; echo "<br />";
@@ -70,7 +72,7 @@ if (isset($_POST["name"])) {
     </header>
 
     <ul>
-        <li><a href="index.html" class="active">Basic</a></li>
+        <li><a href="index.html" class="active">New Client</a></li>
         <li><a href="form-register.html">Register</a></li>
         <li><a href="form-login.html">Login</a></li>
         <li><a href="form-mini.html">Mini</a></li>
@@ -100,14 +102,14 @@ if (isset($_POST["name"])) {
             <div class="form-row">
                 <label>
                     <span>Mobile</span>
-                    <input type="text" name="mob">
+                    <input maxlength="10" type="text" name="mob">
                 </label>
             </div>
 
             <div class="form-row">
                 <label>
                     <span>Aadhar</span>
-                    <input type="text" name="uid">
+                    <input maxlength="12" type="text" name="uid">
                 </label>
             </div>
 
@@ -116,6 +118,20 @@ if (isset($_POST["name"])) {
                     <span>Address</span>
                     <textarea name="adrs"></textarea>
                 </label>
+            </div>
+
+            <div class="form-row">
+                    <label>
+                        <span>SBI ACCNO</span>
+                        <input  maxlength="11" type="text" name="sbiaccno">
+                    </label>
+            </div>
+
+            <div class="form-row">
+                    <label>
+                        <span>CIF</span>
+                        <input maxlength="11" type="text" name="cif">
+                    </label>
             </div>
 
             <div class="form-row">
