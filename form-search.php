@@ -55,13 +55,13 @@
         <!-- You only need this form and the form-search.css -->
 
         <form action = "<?php $_PHP_SELF ?>" method = "POST" class="form-search" method="post" action="#">
-            <input type="search" name="search" placeholder="Mobile No...">
+            <input type="search" name="search" placeholder="Name or Mobile No...">
             <button type="submit">Search</button>
             <i class="fa fa-search"></i>
         </form>
      
         
-        
+        <!-- phpcode responsible for find and list client details row matching phone no -->
         <?php
         if (isset($_POST["search"])) {
             $mno = $_POST['search'];
@@ -97,6 +97,29 @@
                     echo "</tr>";
                 }
             }
+            //search with username
+        else
+        {
+            $cname = $_POST['search'];
+            //echo "Client Name: ". $_POST['search']. "<br />"; //print variable value
+            $sql="SELECT * FROM tbl_clients WHERE cname like '".$cname."%'";
+            $res=$con->query($sql);
+            $nrows=$res->num_rows;
+            if ($nrows > 0) {
+                while ($get_column=$res->fetch_assoc()) {
+                    echo "<tr>
+                    <td><input type='radio' name='cid' value=" . $get_column['cid']. " />";
+                    echo "<td>". $get_column['cid']."</td>";
+                    echo "<td>". $get_column['cname']."</td>";
+                    echo "<td>". $get_column['mno']."</td>";
+                    echo "<td>". $get_column['uid']."</td>";
+                    echo "<td>". $get_column['sbiaccno']."</td>";
+                    echo "<td>". $get_column['cif']."</td>";
+                    echo "<td>". date('d-m-Y', strtotime($get_column['dob'])). "</td>";
+                    echo "</tr>";
+                }
+            }
+        }            
             echo "</table>
             <br><br><br><br><br>
             <div>

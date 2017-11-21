@@ -53,15 +53,15 @@
  </head>
 
  <body>
-    <header style="background-color: #0645ad">
-        <center><h1>NetTech SBI Banking</h1></center>
+    <header>
+    <center><h1>NetTech SBI Banking</h1></center>
         <!-- <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a> -->
     </header>
 
     <ul>
         <li><a href="../index.php">New Client</a></li>
         <li><a href="index.php" class="active">Customer Banking</a></li>
-        <li><a href="./banking/personal.php">Self Banking</a></li>
+        <li><a href="personal.php">Self Banking</a></li>
         <li><a href="../form-search.php">Search</a></li>
     </ul>
 
@@ -102,10 +102,34 @@
             }
         }
         echo "</table>
-            <br><br><br><br><br>
+            <br><br>
           </form>";
         mysqli_close($con);
     }
+
+    //phpcode responsibele for displaying tbl_cash row
+        include("../connection.php");
+        $sql="SELECT * FROM tbl_cash";
+        $res=$con->query($sql);
+        $nrows=$res->num_rows;
+        echo "<br>";
+        echo "<form action = 'banking/index.php' method = 'POST' class='form-horizontal'>";
+        print "<table class=\"responstable\">\n";
+        print "         <tr>\n";
+        print "            <th data-th=\"Order Details\"><span>Cash Balance</span></th>\n";
+        print "            <th><span><center>Account Balance</center></span></th>\n";
+        print "         </tr>";
+        if ($nrows > 0) {
+            while ($get_column=$res->fetch_assoc()) {
+                echo "<td>". $get_column['scih']."</td>";
+                echo "<td><center>". $get_column['scab']."</center></td>";
+                echo "</tr>";
+            }
+        }
+        echo "</table>
+            <br><br>
+          </form>";
+        mysqli_close($con);
 
     //phpcode responsibele for inserting into tbl_sbitrans
     if (isset($_POST["type"])) {

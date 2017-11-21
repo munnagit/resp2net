@@ -22,8 +22,8 @@
  </head>
 
  <body>
-    <header style="background-color: #0645ad">
-        <center><h1>NetTech SBI Banking</h1></center>
+    <header>
+        <center><h1>SBI Self Banking</h1></center>
         <!-- <a href="http://tutorialzine.com/2015/07/freebie-7-clean-and-responsive-forms/">Download</a> -->
     </header>
 
