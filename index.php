@@ -7,7 +7,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Basic Form</title>
+	<title>NetTech</title>
 
 	<link rel="stylesheet" href="assets/demo.css">
     <link rel="stylesheet" href="assets/form-basic.css">
@@ -73,11 +73,7 @@ if (isset($_POST["name"])) {
 
     <ul>
         <li><a href="index.html" class="active">New Client</a></li>
-        <li><a href="form-register.html">Register</a></li>
-        <li><a href="form-login.html">Login</a></li>
-        <li><a href="form-mini.html">Mini</a></li>
-        <li><a href="form-labels-on-top.html">Labels on Top</a></li>
-        <li><a href="form-validation.html">Validation</a></li>
+        <li><a href="./banking/personal.php">Self Banking</a></li>
         <li><a href="form-search.php">Search</a></li>
     </ul>
 
